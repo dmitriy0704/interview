@@ -1,0 +1,101 @@
+Этапы подготовки:
+
+1) Первичный скрининг HR. Рассказать о своих достижениях. Нужно иметь несколько резюме под разные вакансии.
+
+2) Тех. собес: 
+- алгоритмы: порешать Leeetcode, поиск, сортировки, строки.
+- программирование: лайвкодинг: написать MVC приложение с unit-тестами и кодревью: проблемы в коде, race-condition.
+3) Теория
+4) Опыт работы
+5) System design
+Микросервисы: написать приложение из 2-3х сервисов + kafka + api-gateway + security(keyclock). Знать Docker, Kubernates, Keycloack, ApiGateway. Объяснить масштабирование и доступность. Общение микросервисов через REST.
+
+
+Ревью:
+
+код с дедлокам,
+детермнированым кодом
+код без атомиков
+моменты с БД
+	транзакции: REST вызов
+
+Теория:
+БД: блокировки(оптимистические, блокировки, deadlock), индексы, explain, explyan analise, партицироывание, connection pool, 
+ACID, Уровни изоляции трензакции, 
+
+тестирование: 
+JUnit, Mockito, Jacoco, Testcontiners, RESTAsure, WireMock, Интеграционные тесты
+
+Задание
+ревью, БД, SQL запросы, Hiber, JDBC, JUnit, WireMock, 	
+
+резюме
+
+
+Примеры ревью:
+
+@Service
+
+public class OrderService {
+
+
+
+    @Autowired
+
+    private OrderRepository orderRepository;
+
+
+
+    private RestTemplate restClient = MyRestTemplate();
+
+
+
+    @Transactional
+
+    public void createOrder(Order order) {
+
+        orderRepository.save(order);
+
+        String paymentStatus = restClient.postForObject(
+
+                "https://api.payments.com", order, String.class);
+
+        System.out.println("request is done");
+
+        if ("SUCCESS".equals(paymentStatus)) {
+
+            order.setStatus("PAID");
+
+            orderRepository.save(order);
+
+        } else {
+
+            throw new RuntimeException("Payment failed");
+        }
+    }
+}
+
+
+
+@Service
+public class OrderService {
+
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
+    private PaymentService paymentService; // Класс без @Transactional
+
+    public void createOrder(Order order) {
+        // 1. Транзакция только на работу с базой
+        saveOrderInternal(order);
+        // 2. Внешний вызов БЕЗ активной транзакции
+        paymentService.charge(order);
+    }
+
+
+    @Transactional
+    public void saveOrderInternal(Order order) {
+        orderRepository.save(order);
+    }
+}

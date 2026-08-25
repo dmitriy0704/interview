@@ -1,0 +1,62 @@
+Отобрал задачки для собесов:
+https://github.com/dmitriy0704/java-interview
+
+
+Каналы:
+
+По Java:
+
+Java | Вопросы собесов
+@easy_java_ru
+
+Senior Java Developer
+@seniorjavist
+
+Java News
+@java_newss
+
+Java Guru
+@javatasks
+
+Короткие теоритические выжимки по Java:
+@javaquiz
+
+
+Kotlin:
+@KotlinSenior
+
+Spring:
+@spring_aio
+
+Конференции по Java:
+@jpoint_joker_channel
+
+Решения задач с Leedcode:
+@easy_java_task
+@easy_kotlin_task
+
+
+Про бэкенд:
+@BackendPortal
+@habr_dev
+
+Roadmap
+https://roadmap.sh/roadmaps
+
+System Design:
+https://habr.com/ru/articles/873388/
+
+
+Порешать задачки:
+
+Codewars
+https://www.codewars.com/dashboard
+
+Яндекс Coderun
+https://coderun.yandex.ru/catalog
+
+SQL academy
+https://sql-academy.org/ru/trainer
+
+Теория по алгоритмам
+https://ru.algorithmica.org/
